@@ -23,6 +23,7 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 
 export default class User extends compose(BaseModel, AuthFinder) {
   static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
+
   @column({ isPrimary: true })
   declare id: number
 

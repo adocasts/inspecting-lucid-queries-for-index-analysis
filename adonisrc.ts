@@ -25,7 +25,11 @@ export default defineConfig({
   | will be scanned automatically from the "./commands" directory.
   |
   */
-  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@adonisjs/mail/commands')],
+  commands: [
+    () => import('@adonisjs/core/commands'),
+    () => import('@adonisjs/lucid/commands'),
+    () => import('@adonisjs/mail/commands'),
+  ],
 
   /*
   |--------------------------------------------------------------------------
@@ -51,7 +55,7 @@ export default defineConfig({
     () => import('@adonisjs/static/static_provider'),
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/auth/auth_provider'),
-    () => import('@adonisjs/mail/mail_provider')
+    () => import('@adonisjs/mail/mail_provider'),
   ],
 
   /*
@@ -62,10 +66,15 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('#start/routes'), () => import('#start/kernel'), {
-    file: () => import('#start/globals'),
-    environment: ['web'],
-  }],
+  preloads: [
+    () => import('#start/routes'),
+    () => import('#start/kernel'),
+    {
+      file: () => import('#start/globals'),
+      environment: ['web'],
+    },
+    () => import('#start/lucid/base_model'),
+  ],
 
   /*
   |--------------------------------------------------------------------------

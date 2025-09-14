@@ -11,11 +11,16 @@ export default class PostsController {
     const posts = await Post.query()
       .where('state', 'public')
       .where('publishAt', '<=', DateTime.now().toSQL())
+      .select('id', 'userId', 'title', 'state', 'publishAt')
       .orderBy('publishAt', 'desc')
       .paginate(page, perPage)
 
     posts.baseUrl(router.makeUrl('posts'))
 
-    return view.render('pages/posts', { posts })
+    if (request.accepts(['html'])) {
+      return view.render('pages/posts', { posts })
+    }
+
+    return posts
   }
 }

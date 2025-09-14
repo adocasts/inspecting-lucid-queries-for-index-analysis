@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const UsersController = () => import('#controllers/users_controller')
 const PostsController = () => import('#controllers/posts_controller')
 
 const LoginController = () => import('#controllers/auth/login_controller')
@@ -25,6 +26,7 @@ router.on('/').render('pages/home')
 router.on('/jumpstart').render('pages/jumpstart').as('jumpstart')
 
 router.get('/posts', [PostsController]).as('posts')
+router.get('/users', [UsersController]).as('users')
 
 //* AUTH -> LOGIN, REGISTER, LOGOUT
 router.get('/login', [LoginController, 'show']).as('auth.login.show').use(middleware.guest())
